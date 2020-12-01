@@ -131,43 +131,4 @@ for epoch in range(0, 60):
 
 
 
-def send_mail():
-
-	fromaddr = "dailymeditationsforyou@gmail.com"
-	recip = ["amt2893@gmail.com, blaqnbloo@gmail.com"]
-	msg = MIMEMultipart()
-
-	msg['From'] = fromaddr
-	msg['To'] = ", ".join(recipients)
-	msg['Subject'] = "Todays's Poem"
-
-	body = email_poem(model)
-
-	msg.attach(MIMEText(body, 'plain'))
-
-
-
-
-	server = smtplib.SMTP('smtp.gmail.com', 587)
-	server.starttls()
-	server.login(fromaddr, "msjwgytvodndaabb")
-	text = msg.as_string()
-	server.sendmail(fromaddr, toaddr, text)
-	server.quit()
-
-
-def job():
-    print("I'm working...")
-    send_mail()
-
-schedule.every().day.at("8:30").do(job)
-schedule.every().day.at("12:30").do(job)
-
-
-while True:
-    schedule.run_pending()
-    time.sleep(1)	
-
-
-
 
